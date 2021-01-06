@@ -1,0 +1,33 @@
+<html xmlns:th="https://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="registration-class">
+    <h1>Register</h1>
+    <form action="/player/registration" th:object="${player}" method="POST" enctype="utf8">
+        <div>
+            <label>Login</label>
+            <input th:field="*{name}"/>
+            <p th:each="error: ${#fields.errors('name')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" th:field="*{password}"/>
+            <p th:each="error : ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Confirm password</label>
+            <input type="password" th:field="*{matchingPassword}"/>
+        </div>
+        <div>
+            <button type="submit">submit</button>
+        </div>
+    </form>
+    <a href="/login">Login</a>
+</div>
+</body>
+</html>

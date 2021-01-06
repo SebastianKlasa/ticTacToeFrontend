@@ -1,0 +1,30 @@
+/* Global */
+$container-padding: 24px;
+$container-width: 1160px + ( 2 * $container-padding );
+$point: 1rem / 2;
+$containerWidth: 754px;
+
+/* Navigation */
+$navbar-height: 80px;
+$navbar-social-icon-space: 16px;
+$navbar-social-links-space: 24px;
+$navbar-index: 1000;
+$navbar-mask-index: 1001;
+$navbar-height-mobile: 6 * $point;
+
+/* Responsive */
+$small-desktop: 1280px;
+$tablet: 1024px;
+$phone: 767px; 
+$small-phone: 560px;
+$smallest-phone: 320px;
+
+// Timeline
+$circle-diameter: 25px;
+
+// Colors
+$accentPrimary: #05a6df;
+$accentSecondary: #008AB3;
+$caution: #EEAA10;
+$success: #22AA55;
+$error: #f65327;

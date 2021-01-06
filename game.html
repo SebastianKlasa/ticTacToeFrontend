@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            var player = /*[[${#request.userPrincipal.principal}]]*/ null;
+            var game = /*[[${game}]]*/ null;
+            var id = /*[[${game.id}]]*/ null;
+            console.log("hello var");
+        /*]]>*/
+    </script>
+    <script type="text/javascript" th:src="@{/script.js}"></script>
+
+</head>
+
+<body onload="connect();onloadPutVariables();">
+<div class="game-container">
+    <div class="userData" id="userData">
+        <p>player.name </p><p>games : 2 </p><p>wins : 1 </p><p>draws : 5 </p><p>loses : 8</p>
+        <a class="logoutButton" href="/logout">Logout</a></div>
+    <h1>TicTac Game</h1>
+    <div class="gameID">
+        <h2>Game id: </h2>
+        <span th:text="${game.id}">somE1D</span>
+    </div>
+    <div class="playersContainer">
+        <span class="buttons-game" id="joinButtonContainer">
+            <button class="joinButton">Join the game</button>
+            <a href="/">Back</a>
+        </span>
+        <div class="roundData">
+            <h3 id="playerRound">Player round: nazwaUsera</h3>
+            <p id="roundTimer">00:25</p>
+        </div>
+        <table class="players-table">
+            <tr>
+                <th>Name</th>
+                <th>Games</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losts</th>
+                <th>Leave game</th>
+                <th>Admin actions</th>
+                <th>Draw</th>
+            </tr>
+            <tr>
+                <td id="player1">nazwa1
+                </td>
+                <td id="player1games">2
+                </td>
+                <td id="player1wins">2 
+                </td>
+                <td id="player1draws">1
+                </td>
+                <td id="player1lost">1
+                </td>
+                <td id="leaveGame1"><button class="leaveButton">Leave the game</button>
+                </td>
+                <td id="startGame1"><button class="startButton">Start</button>
+                </td>
+                <td id="drawOffer1"><button class="drawOffer">Offer draw</button>
+                </td>
+            </tr>
+            <tr>
+                <td id="player2">nazwa2
+                </td>
+                <td id="player2games">3
+                </td>
+                <td id="player2wins">3
+                </td>
+                <td id="player2draws">2
+                </td>
+                <td id="player2lost">23
+                </td>
+                <td id="leaveGame2"><button class="leaveButton">Leave the game</button>
+                </td>
+                <td id="kickPlayer2"><button class="kickPlayer">Kick</button>
+                </td>
+                <td id="drawOffer2"><button class="drawOffer">Offer draw</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="board">
+        <table class="chess-board" id="board">
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+            <tr>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+                <td class="light"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

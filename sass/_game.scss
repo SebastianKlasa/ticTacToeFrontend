@@ -1,0 +1,109 @@
+.game-container{
+    .chess-board { 
+        border-spacing: 0; 
+        border-collapse: collapse; 
+    }
+    .chess-board th { 
+        padding: .5em; 
+    }
+    .chess-board td { 
+        border: 1px solid; 
+        width: 2em; 
+        height: 2em; 
+    }
+    .chess-board .light { 
+        background: #eee; 
+    }
+    .chess-board .dark { 
+        background: #000; 
+    }
+    .chess-board .cross { 
+        background-image: url("../../img/cross.png"); 
+        background-repeat:no-repeat; 
+        background-size:2em 2em; 
+    }
+    .chess-board .circle { 
+        background-image: url("../../img/circle.png"); 
+        background-repeat:no-repeat; 
+        background-size:2em 2em; 
+    }
+    .players-table td { 
+        border: 1px solid; 
+    }
+
+    .gameID{
+        display: flex;
+        h2{
+            font-size: 40px;
+            text-align: center;
+            margin: 0;
+            margin-bottom: 2rem;
+            width: 50%;
+            text-align: right;
+            margin-right: 4px;
+        }
+        span{
+            font-size: 32px;
+            width: 50%;
+            text-align: left;
+            margin-bottom: 2rem;
+            margin-top: 4px;
+            margin-left: 4px;
+        }
+    }
+
+    .playersContainer{
+        width: 100%;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .buttons-game{      
+        }
+
+        .roundData{
+            p{
+                font-size: 30px;
+                text-align: center;
+            }
+        }
+
+        .players-table{
+            th { 
+                padding: .1em; 
+            }
+            td { 
+                border: 1px solid; 
+                width: 2em; 
+                height: 2em; 
+                text-align: center;
+                button{
+                    margin: 0;
+                }
+            }
+        }
+
+        button{
+            font-family: "Amatic-Bold", sans-serif;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+            background-color: #f44336;
+            border: none;
+            color: white;
+            width: 96px;
+            height: 45px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .board{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
