@@ -103,6 +103,9 @@ a:hover {
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start; }
+  @media (max-width: 767px) {
+    .registration-class {
+      margin: 0; } }
   .registration-class form {
     width: 100%;
     align-items: center; }
@@ -111,13 +114,23 @@ a:hover {
       height: 50px;
       display: flex;
       flex-wrap: wrap; }
+      @media (max-width: 767px) {
+        .registration-class form div {
+          margin-bottom: 2rem; } }
       .registration-class form div label {
         width: 20%;
         text-align: right;
         font-size: 20px; }
+        @media (max-width: 767px) {
+          .registration-class form div label {
+            width: 100%;
+            text-align: left; } }
       .registration-class form div input {
         width: 50%;
         height: 20px; }
+        @media (max-width: 767px) {
+          .registration-class form div input {
+            width: 100%; } }
       .registration-class form div p {
         color: #e67575;
         margin-top: 0;
@@ -146,6 +159,9 @@ a:hover {
   flex-wrap: wrap;
   justify-content: flex-start;
   max-width: 754px; }
+  @media (max-width: 767px) {
+    .login-container {
+      margin: 0; } }
   .login-container form {
     width: 100%;
     align-items: center; }
@@ -186,6 +202,9 @@ a:hover {
 .game-container .chess-board {
   border-spacing: 0;
   border-collapse: collapse; }
+  @media (max-width: 767px) {
+    .game-container .chess-board {
+      width: 100%; } }
 
 .game-container .chess-board th {
   padding: .5em; }
@@ -194,6 +213,10 @@ a:hover {
   border: 1px solid;
   width: 2em;
   height: 2em; }
+  @media (max-width: 767px) {
+    .game-container .chess-board td {
+      height: 0;
+      padding-bottom: 5%; } }
 
 .game-container .chess-board .light {
   background: #eee; }
@@ -213,6 +236,21 @@ a:hover {
 
 .game-container .players-table td {
   border: 1px solid; }
+
+.game-container button {
+  font-family: "Amatic-Bold", sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  background-color: #f44336;
+  border: none;
+  color: white;
+  width: 96px;
+  height: 45px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 0.5rem; }
 
 .game-container .gameID {
   display: flex; }
@@ -238,6 +276,17 @@ a:hover {
   display: flex;
   justify-content: space-evenly;
   align-items: center; }
+  @media (max-width: 767px) {
+    .game-container .playersContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center; } }
+  @media (max-width: 1024px) {
+    .game-container .playersContainer .buttons-game button {
+      margin-bottom: 2rem; } }
+  .game-container .playersContainer .roundData h3 {
+    text-align: center; }
   .game-container .playersContainer .roundData p {
     font-size: 30px;
     text-align: center; }
@@ -250,25 +299,52 @@ a:hover {
     text-align: center; }
     .game-container .playersContainer .players-table td button {
       margin: 0; }
-  .game-container .playersContainer button {
-    font-family: "Amatic-Bold", sans-serif;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-    background-color: #f44336;
-    border: none;
-    color: white;
-    width: 96px;
-    height: 45px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin-top: 0.5rem; }
+  @media (max-width: 767px) {
+    .game-container .playersContainer .players-table th {
+      padding: 0; }
+    .game-container .playersContainer .players-table td {
+      border: 1px solid;
+      width: 0;
+      height: 0;
+      text-align: center; }
+      .game-container .playersContainer .players-table td button {
+        margin: 0;
+        width: 100%;
+        height: 100%; } }
 
 .game-container .board {
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.game-container .winner-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 80px;
+  width: 700px;
+  height: 700px;
+  border: 3px solid #000000;
+  background-color: #81cf57;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9; }
+  @media (max-width: 1024px) {
+    .game-container .winner-label {
+      width: 500px;
+      height: 500px; } }
+  @media (max-width: 767px) {
+    .game-container .winner-label {
+      width: 300px; } }
+  .game-container .winner-label .content {
+    text-align: center; }
+    .game-container .winner-label .content h2 {
+      font-size: 45px; }
+    .game-container .winner-label .content h3 {
+      font-size: 30px; }
 
 .home-container {
   font-size: 20px; }
@@ -287,6 +363,9 @@ a:hover {
       justify-content: center;
       align-items: center;
       height: 654px; }
+      @media (max-width: 767px) {
+        .home-container .actions-home .start-home {
+          height: 150px; } }
     .home-container .actions-home .join-home {
       width: 50%;
       margin: 0;
@@ -295,6 +374,9 @@ a:hover {
       justify-content: center;
       align-items: center;
       height: 654px; }
+      @media (max-width: 767px) {
+        .home-container .actions-home .join-home {
+          height: 150px; } }
     .home-container .actions-home button {
       font-family: "Amatic-Bold", sans-serif;
       margin-left: auto;
@@ -307,6 +389,9 @@ a:hover {
       text-align: center;
       text-decoration: none;
       font-size: 32px; }
+      @media (max-width: 767px) {
+        .home-container .actions-home button {
+          padding: 10px 22px; } }
     .home-container .actions-home .center {
       width: 250px; }
       .home-container .actions-home .center label {

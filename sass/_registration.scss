@@ -6,6 +6,9 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
+    @media(max-width: $phone){
+        margin: 0;
+    }
 
     form{
         width: 100%;
@@ -16,14 +19,24 @@
             height: 50px;
             display: flex;
             flex-wrap: wrap;
+            @media(max-width: $phone){
+                margin-bottom: 2rem;
+            }
             label{
                 width:20%;
                 text-align: right;
                 font-size: 20px;
+                @media(max-width: $phone){
+                    width:100%;
+                    text-align: left;
+                }
             }
             input{
                 width:50%;
                 height: 20px;
+                @media(max-width: $phone){
+                    width:100%;
+                }
             }
             p{
                 color: #e67575;

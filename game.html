@@ -3,6 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/style.css">
@@ -24,6 +25,13 @@
 
 <body onload="connect();onloadPutVariables();">
 <div class="game-container">
+    <div class="winner-label">
+        <div class="content">
+            <h2>Game over</h2>
+            <h3 id="winner-header">winner is: smt / draw</h3>
+            <button class="playAgainButton">Play again</button>
+        </div>
+    </div>
     <div class="userData" id="userData">
         <p>player.name </p><p>games : 2 </p><p>wins : 1 </p><p>draws : 5 </p><p>loses : 8</p>
         <a class="logoutButton" href="/logout">Logout</a></div>
